@@ -1,6 +1,6 @@
 import flet as ft
 
-def card_de_contato(contato, tel):
+def card_de_contato(contato, tel, expande=False):
     return ft.Container(
         content=ft.Column(
             [
@@ -10,9 +10,10 @@ def card_de_contato(contato, tel):
                     subtitle=ft.Text(
                         tel
                     ),
+                    expand=expande,
                 ),
                 ft.Row([
-                        ft.TextButton('Ver contato'), 
+                        ft.ElevatedButton('Ver contato', on_click=lambda e: expansao()), 
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
@@ -22,6 +23,11 @@ def card_de_contato(contato, tel):
         width=400,
         padding=10,
     )
+
+def expansao():
+    print('apertou expandir')
+    #     card.expand = not card.expand
+    #     card.update()
 
 
 def main(page):
