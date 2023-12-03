@@ -1,5 +1,7 @@
 import flet as ft
 
+def card
+
 def main(page):
     page.title = 'Exemplo de card'
     page.add(
