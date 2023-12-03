@@ -1,6 +1,6 @@
 import flet as ft
 
-def card(contato, tel):
+def card_de_contato(contato, tel):
     return ft.Container(
         content=ft.Column(
             [
@@ -11,9 +11,11 @@ def card(contato, tel):
                         tel
                     ),
                 ),
-                ft.Row(
-                    [ft.TextButton('Ver contato'), ft.TextButton('Voltar')],
-                    alignment=ft.MainAxisAlignment.END,
+                ft.Row([
+                        ft.TextButton('Ver contato'), 
+                        ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
                 ),
             ]
         ),
@@ -26,7 +28,7 @@ def main(page):
     page.title = 'Exemplo de card'
     page.add(
         ft.Card(
-            card('Nome do contato', 'Telefone da pessoa')
+            card_de_contato('Nome do contato', 'Telefone da pessoa')
         )
     )
 
