@@ -1,21 +1,21 @@
 import flet as ft
 
 def main(page):
-    page.title = "Card Example"
+    page.title = 'Exemplo de card'
     page.add(
         ft.Card(
             content=ft.Container(
                 content=ft.Column(
                     [
                         ft.ListTile(
-                            leading=ft.Icon(ft.icons.ALBUM),
-                            title=ft.Text("The Enchanted Nightingale"),
+                            leading=ft.Icon(ft.icons.CONTACT_PHONE),
+                            title=ft.Text('Nome do Contato'),
                             subtitle=ft.Text(
-                                "Music by Julie Gable. Lyrics by Sidney Stein."
+                                'Número do contato.'
                             ),
                         ),
                         ft.Row(
-                            [ft.TextButton("Buy tickets"), ft.TextButton("Listen")],
+                            [ft.TextButton('Ver contato'), ft.TextButton('Voltar')],
                             alignment=ft.MainAxisAlignment.END,
                         ),
                     ]
@@ -26,7 +26,7 @@ def main(page):
         )
     )
 
-ft.app(target=main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)
 
 
 
