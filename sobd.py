@@ -1,90 +1,24 @@
-import sqlite3
+from db import dbcomando
 
-# #CRUD (Criar e inserir [CREAT])
-# conexao = sqlite3.connect('banco.db')
-# comando = conexao.cursor()
+# # Criar uma instância da classe
+db = dbcomando("banco2.db")
+db.criar_tabela('Pessoa', 'Nome', 'Idade', 'Sexo')
 
-# #Criação
-# comando.execute(
-#     """CREATE TABLE IF NOT EXISTS tabela1 (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NUll, 
-#         nome TEXT NOT NUll
-#     )"""
-# )
+# # Exemplo de inserção
+# dados_inserir = [('Mariana',), ('Jonas',)]
+# manipulador_bd.inserir_dados(dados_inserir)
 
-# conexao.close()
+# # Exemplo de leitura
+# dados_lidos = manipulador_bd.ler_dados()
+# print("Dados lidos:", dados_lidos)
 
-# #Inserção
-# dado = [
-#     ('Maria'),
-# ]
-# comando.execute("""INSERT INTO tabela1 (nome) VALUES (?)""", dado)
-# conexao.commit()
+# # Exemplo de atualização
+# novos_dados_atualizar = [('Jesebel', 1), ('Emanual', 2)]
+# manipulador_bd.atualizar_dados(novos_dados_atualizar)
 
-# #Inserção dupla
-# dado = [
-#     ('Mariana',), 
-#     ('Jonas',)
-# ]
+# # Exemplo de exclusão
+# dado_a_excluir = 'Jesebel'
+# manipulador_bd.excluir_dados(dado_a_excluir)
 
-# comando.executemany("""INSERT INTO tabela1 (nome) VALUES (?)""", dado)
-# conexao.commit()
-
-# #CRUD (Ler [READ])
-# def ler_banco():
-#     conexao = sqlite3.connect('banco.db')
-#     comando = conexao.cursor()
-
-#     comando.execute("""SELECT * FROM tabela1""")
-#     consulta=comando.fetchall()
-#     print(consulta)
-#     #Para melhor visibilidade usamos um for
-#     for pessoa in consulta:
-#         print(pessoa[1])
-
-#     conexao.close()
-
-# #CRUD (Editar dados [UPDATE])
-# conexao = sqlite3.connect('banco.db')
-# comando = conexao.cursor()
-
-# dado_antigo='Julia'
-# dado='Maria'
-# comando.execute(
-#     """UPDATE tabela1 SET nome = ? WHERE nome = ?""", 
-#     (dado, dado_antigo),
-# )
-# conexao.commit()
-# conexao.close()
-# #ler_banco()
-
-# Edição dupla
-# conexao = sqlite3.connect('banco.db')
-# comando = conexao.cursor()
-
-# novos_dados = [
-#     ('Jesebel', 1), 
-#     ('Emanual', 2)
-# ]
-# # Iterar sobre os novos dados e executar a atualização
-# for pessoa in novos_dados:
-#     comando.execute(
-#         """UPDATE tabela1 SET nome = ? WHERE id = ?""",
-#         pessoa
-#     )
-# conexao.commit()
-# conexao.close()
-# #ler_banco()
-
-# #CRUD (Apagar dados [DELITE])
-# conexao = sqlite3.connect('banco.db')
-# comando = conexao.cursor()
-# # Dado a ser excluído
-# dado_a_excluir = 'Mariana'
-# comando.execute(
-#     """DELETE FROM tabela1 WHERE nome = ?""",
-#     (dado_a_excluir,))
-
-# conexao.commit()
-# conexao.close()
-# ler_banco()
+# # Fechar a conexão com o banco de dados
+# manipulador_bd.fechar_conexao()
