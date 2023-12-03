@@ -34,7 +34,7 @@ def main(page: ft.Page):
                     [
                         ft.AppBar(title=ft.Text("Mostar Contatos"), bgcolor=ft.colors.SURFACE_VARIANT),
                         ft.ElevatedButton("pesquisa", on_click=lambda _: page.go("/")),
-                        ft.ElevatedButton("Card de contatos", on_click=lambda _: page.go("/")),
+                        ft.ElevatedButton("Card de  listView contatos", on_click=lambda _: page.go("/")),
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
                     
