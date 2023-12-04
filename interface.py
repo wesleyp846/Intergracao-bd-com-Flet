@@ -1,10 +1,12 @@
 import flet as ft
+from card import card_expansivel
 
 def main(page: ft.Page):
     page.title = "Agenda de Contatos"
     page.padding = 10
     page.window_width = 400
     page.window_height = 650
+    page.theme_mode = ft.ThemeMode.DARK
     page.update()
 
     def route_change(route):
@@ -34,7 +36,7 @@ def main(page: ft.Page):
                     [
                         ft.AppBar(title=ft.Text("Mostar Contatos"), bgcolor=ft.colors.SURFACE_VARIANT),
                         ft.ElevatedButton("pesquisa", on_click=lambda _: page.go("/")),
-                        ft.ElevatedButton("Card de  listView contatos", on_click=lambda _: page.go("/")),
+                        card_expansivel(),
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
                     
