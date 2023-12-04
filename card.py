@@ -1,9 +1,9 @@
 import flet as ft
 
-def card_expansivel(contato='contato', tel='contato', email='contato', endereco='contato'):
+def card_expansivel(nome='Nome', tel='Telefone', email='E-mail:', endereco='Endereço:'):
     return ft.ExpansionTile(
         leading=ft.Icon(ft.icons.CONTACT_PHONE),
-        title=ft.Text(contato),
+        title=ft.Text(nome),
         subtitle=ft.Text(tel),
         trailing=ft.Icon(ft.icons.ARROW_DROP_DOWN),
         controls=[
