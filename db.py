@@ -24,9 +24,9 @@ class dbcomando:
         )
         self.conexao.commit()
 
-    def ler_dados(self):
+    def ler_dados(self, tabela):
         # Consultar todos os dados da tabela
-        self.comando.execute("SELECT * FROM tabela1")
+        self.comando.execute(f"SELECT * FROM {tabela}")
         return self.comando.fetchall()
 
     def atualizar_dados(self, novos_dados):

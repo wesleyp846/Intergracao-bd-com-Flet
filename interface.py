@@ -1,4 +1,5 @@
 import flet as ft
+from db import dbcomando
 from card import card_expansivel
 
 def main(page: ft.Page):
@@ -8,6 +9,8 @@ def main(page: ft.Page):
     page.window_height = 650
     page.theme_mode = ft.ThemeMode.DARK
     page.update()
+    db = dbcomando('banco.db')
+    db.criar_tabela('contatos', 'nome', 'tel', 'email', 'endereco')
 
     def route_change(route):
         page.views.clear()
