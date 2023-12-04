@@ -1,12 +1,14 @@
 from db import dbcomando
 
 # # Criar uma instância da classe
-db = dbcomando("banco2.db")
-db.criar_tabela('Pessoa', 'Nome', 'Idade', 'Sexo')
+db = dbcomando('banco.db')
+db.criar_tabela('contatos', 'nome', 'tel', 'email', 'endereco')
 
-# # Exemplo de inserção
-# dados_inserir = [('Mariana',), ('Jonas',)]
-# manipulador_bd.inserir_dados(dados_inserir)
+# Exemplo de inserção
+dados_inserir = [('Mariana', '549874563621', 'mariana@jupira.com', 'Av.Calhamaço',), 
+                 ('Jonas', '59748572134', 'mariana@jupira.com', 'Rua Terebentina')]
+
+db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', dados_inserir)
 
 # # Exemplo de leitura
 # dados_lidos = manipulador_bd.ler_dados()

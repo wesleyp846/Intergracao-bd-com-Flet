@@ -1,3 +1,19 @@
 /env
+# # Ignorar arquivos temporários do VSCode
+# .vscode/
+
+# # Ignorar arquivos de byte compilados do Python
+# __pycache__/
+# *.pyc
+# *.pyo
+# *.pyd
+
+# # Ignorar arquivos de configuração do Python
+# *.pyc
+# *.pyo
+# *.pyd
+# __pycache__/
+
+# # Ignorar arquivos de banco de dados SQLite
+# *.sqlite
 *.db
-/_*

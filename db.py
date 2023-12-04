@@ -6,18 +6,22 @@ class dbcomando:
         self.conexao = sqlite3.connect(nome_banco_dados)
         self.comando = self.conexao.cursor()
 
-    def criar_tabela(self, tabela,colunat,colunan, colunate):
+    def criar_tabela(self, tabela, coluna1, coluna2, coluna3, coluna4):
         self.comando.execute(
             f"""CREATE TABLE IF NOT EXISTS {tabela} (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                {colunat} TEXT NOT NULL, {colunan} INTEGER, {colunate} TEXT
-                )"""
-            )
+                {coluna1} TEXT NOT NULL, {coluna2} TEXT, 
+                {coluna3} TEXT, {coluna4} TEXT
+            )"""
+        )
         self.conexao.commit()
 
-    def inserir_dados(self, dados):
+    def inserir_dados(self, tabela, coluna1, coluna2, coluna3, coluna4, dados):
         # Inserir dados na tabela
-        self.comando.executemany("INSERT INTO tabela1 (nome) VALUES (?)", dados)
+        self.comando.executemany(
+            f"""INSERT INTO {tabela} ({coluna1}, {coluna2},
+            {coluna3}, {coluna4}) VALUES (?, ?, ?, ?)""", dados
+        )
         self.conexao.commit()
 
     def ler_dados(self):
