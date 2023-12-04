@@ -33,16 +33,20 @@ def main(page: ft.Page):
         )
         
         if page.route == "/mostar_contatos":
+            db = dbcomando('banco.db')
+            dados=db.ler_dados('contatos')
+            cards=[card_expansivel(card[1],card[2],card[3],card[4]) for card in dados]
             page.views.append(
                 ft.View(
                     "/mostar_contatos",
                     [
                         ft.AppBar(title=ft.Text("Mostar Contatos"), bgcolor=ft.colors.SURFACE_VARIANT),
                         ft.ElevatedButton("pesquisa", on_click=lambda _: page.go("/")),
-                        card_expansivel(),
+                        *cards,
+                        #card_expansivel(),
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
-                    
+                    scroll=ft.ScrollMode.AUTO,
                     horizontal_alignment = ft.CrossAxisAlignment.CENTER,
                     #vertical_alignment=ft.MainAxisAlignment.END,
                 )
