@@ -3,7 +3,7 @@ import sqlite3
 class dbcomando:
     def __init__(self, nome_banco_dados):
         # Conectar ao banco de dados
-        self.conexao = sqlite3.connect(nome_banco_dados)
+        self.conexao = sqlite3.connect(nome_banco_dados, check_same_thread=False)
         self.comando = self.conexao.cursor()
 
     def criar_tabela(self, tabela, coluna1, coluna2, coluna3, coluna4):
@@ -47,26 +47,27 @@ class dbcomando:
 # Exemplo de uso
 if __name__ == "__main__":
     # Criar uma instância da classe
-    manipulador_bd = dbcomando("seu_banco_de_dados.db")
+    db = dbcomando("banco.db")
 
     # Exemplo de inserção
-    dados_inserir = [('Mariana',), ('Jonas',)]
-    manipulador_bd.inserir_dados(dados_inserir)
+    dados_inserir = [('rrgewrg', 'berb', 'brsb', 'brt')]
+    db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', dados_inserir)
+    
 
-    # Exemplo de leitura
-    dados_lidos = manipulador_bd.ler_dados()
-    print("Dados lidos:", dados_lidos)
+    # # Exemplo de leitura
+    # dados_lidos = manipulador_bd.ler_dados()
+    # print("Dados lidos:", dados_lidos)
 
-    # Exemplo de atualização
-    novos_dados_atualizar = [('Jesebel', 1), ('Emanual', 2)]
-    manipulador_bd.atualizar_dados(novos_dados_atualizar)
+    # # Exemplo de atualização
+    # novos_dados_atualizar = [('Jesebel', 1), ('Emanual', 2)]
+    # manipulador_bd.atualizar_dados(novos_dados_atualizar)
 
-    # Exemplo de exclusão
-    dado_a_excluir = 'Jesebel'
-    manipulador_bd.excluir_dados(dado_a_excluir)
+    # # Exemplo de exclusão
+    # dado_a_excluir = 'Jesebel'
+    # manipulador_bd.excluir_dados(dado_a_excluir)
 
-    # Fechar a conexão com o banco de dados
-    manipulador_bd.fechar_conexao()
+    # # Fechar a conexão com o banco de dados
+    # manipulador_bd.fechar_conexao()
 
 # #CRUD (Criar e inserir [CREAT])
 # conexao = sqlite3.connect('banco.db')

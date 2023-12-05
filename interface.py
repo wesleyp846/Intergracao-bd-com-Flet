@@ -51,9 +51,58 @@ def main(page: ft.Page):
             )
 
         if page.route == "/incluir_contato":
+
+            db = dbcomando('banco.db')
+
+            # Refs para os campos de texto
+            nome = ft.Ref[ft.TextField]()
+            tel = ft.Ref[ft.TextField]()
+            email = ft.Ref[ft.TextField]()
+            endereco = ft.Ref[ft.TextField]()
+
+            # Função para salvar o contato
+            def salvar_contato(e):
+                texto_saida = [(name.value, phone.value, mail.value, adress.value,)]
+                print(texto_saida)
+                db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', texto_saida)
+
+            # Layout dos botões
             buttons_row = ft.Row([
-                # FAZER LOGICA DE SALVAR O CONTATO
-                ft.ElevatedButton("Salvar Contato", on_click=lambda _: page.go("/"), width=170),
+                ft.ElevatedButton("Salvar Contato", on_click=salvar_contato, width=170),
+                ft.ElevatedButton("Cancelar", on_click=lambda _: page.go("/"), width=170)
+            ], alignment=ft.MainAxisAlignment.CENTER)
+
+            name=ft.TextField(label="Nome", border_radius=10, ref=nome)
+            phone=ft.TextField(label="Telefone", border_radius=10, ref=tel)
+            mail=ft.TextField(label="E-mail", border_radius=10, ref=email)
+            adress=ft.TextField(label="Endereço", border_radius=10, ref=endereco)
+
+            page.views.append(
+                ft.View(
+                    "/incluir_contato", 
+                    [
+                        ft.AppBar(title=ft.Text("Incluir Contato")),
+                        name,
+                        phone,
+                        mail,
+                        adress,
+                        buttons_row,
+                    ]
+                )
+            )
+
+
+            '''
+            #db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', texto_saida)
+            
+            buttons_row = ft.Row([
+                ft.ElevatedButton(
+                    "Salvar Contato", on_click=print("eu"), 
+                    #texto_saida = [(nome.value, tel.value, email.value, endereco.value,)]
+                    #on_click=db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', texto_saida)
+                    #on_click=lambda _: page.go("/"), 
+                    width=170
+                ),
                 ft.ElevatedButton("Cancelar", on_click=lambda _: page.go("/"), width=170)
             ],
             alignment=ft.MainAxisAlignment.CENTER,
@@ -63,14 +112,14 @@ def main(page: ft.Page):
                 "/incluir_contato",
                 [
                     ft.AppBar(title=ft.Text("Incluir Contato")),
-                    ft.TextField(label="Nome", border_radius=10),
+                    ft.TextField(label="Nome", border_radius=10,),
                     ft.TextField(label="Telefone", border_radius=10),
                     ft.TextField(label="E-mail", border_radius=10), 
                     ft.TextField(label="Endereço", border_radius=10),
                     buttons_row,
                 ]
                 )
-            )
+            )'''
 
         if page.route == "/editar_contato":
             page.views.append(
