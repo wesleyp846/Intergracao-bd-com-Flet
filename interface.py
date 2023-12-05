@@ -20,7 +20,6 @@ def main(page: ft.Page):
                 [   
                     ft.AppBar(title=ft.Text("AGENDA"), bgcolor=ft.colors.SURFACE_VARIANT, center_title=True),
                     ft.ElevatedButton("Mostar Contatos", on_click=lambda _: page.go("/mostar_contatos"), width=170),
-                    ft.ElevatedButton("Buscar Contatos", on_click=lambda _: page.go("/buscar_contatos"), width=170),
                     ft.ElevatedButton("Incluir Contato", on_click=lambda _: page.go("/incluir_contato"), width=170),
                     ft.ElevatedButton("Editar Contato", on_click=lambda _: page.go("/editar_contato"), width=170),
                     ft.ElevatedButton("Excluir Contato", on_click=lambda _: page.go("/excluir_contato"), width=170),
@@ -49,18 +48,6 @@ def main(page: ft.Page):
                     scroll=ft.ScrollMode.AUTO,
                     horizontal_alignment = ft.CrossAxisAlignment.CENTER,
                     #vertical_alignment=ft.MainAxisAlignment.END,
-                )
-            )
-
-        if page.route == "/buscar_contatos":
-            page.views.append(
-                ft.View(
-                    "/buscar_contatos",
-                    [
-                        ft.AppBar(title=ft.Text("Buscar Contatos"), bgcolor=ft.colors.SURFACE_VARIANT),
-                        ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
-                    ],
-                    horizontal_alignment = ft.CrossAxisAlignment.CENTER,
                 )
             )
 
