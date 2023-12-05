@@ -23,7 +23,6 @@ def main(page: ft.Page):
                     ft.ElevatedButton("Incluir Contato", on_click=lambda _: page.go("/incluir_contato"), width=170),
                     ft.ElevatedButton("Editar Contato", on_click=lambda _: page.go("/editar_contato"), width=170),
                     ft.ElevatedButton("Excluir Contato", on_click=lambda _: page.go("/excluir_contato"), width=170),
-                    ft.ElevatedButton("Salvar Contato", on_click=lambda _: page.go("/salvar_contato"), width=170),
                     ft.ElevatedButton("Importar Contatos", on_click=lambda _: page.go("/importar_contatos"), width=170),
                     ft.ElevatedButton("Exportar Contatos", on_click=lambda _: page.go("/exportar_contatos"), width=170),
                 ],
@@ -91,18 +90,6 @@ def main(page: ft.Page):
                     "/excluir_contato",
                     [
                         ft.AppBar(title=ft.Text("Excluir Contato"), bgcolor=ft.colors.SURFACE_VARIANT),
-                        ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
-                    ],
-                    horizontal_alignment = ft.CrossAxisAlignment.CENTER,
-                )
-            )
-
-        if page.route == "/salvar_contato":
-            page.views.append(
-                ft.View(
-                    "/salvar_contato",
-                    [
-                        ft.AppBar(title=ft.Text("Salvar Contato"), bgcolor=ft.colors.SURFACE_VARIANT),
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
                     horizontal_alignment = ft.CrossAxisAlignment.CENTER,
