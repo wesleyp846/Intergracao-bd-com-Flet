@@ -51,9 +51,11 @@ class Card:
                     trailing=ft.PopupMenuButton(
                         icon=ft.icons.MORE_VERT,
                         items=[
-                            ft.PopupMenuItem(text="Editar"),
-                            ft.PopupMenuItem(text="Apagar", 
-                                on_click=lambda _: db.deletar_dados(cartao.nome)
+                            ft.PopupMenuItem(text="Editar",
+                                on_click=lambda _: ft.Page.go("/incluir_contato"),
+                            ),
+                            ft.PopupMenuItem(text="Apagar",
+                                on_click=lambda _: db.deletar_dados(cartao.nome),
                             ),
                         ]
                     )   
