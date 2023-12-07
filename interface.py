@@ -23,7 +23,6 @@ def main(page: ft.Page):
                     ft.ElevatedButton("Mostar Contatos", on_click=lambda _: page.go("/mostar_contatos"), width=170),
                     ft.ElevatedButton("Incluir Contato", on_click=lambda _: page.go("/incluir_contato"), width=170),
                     ft.ElevatedButton("Editar Contato", on_click=lambda _: page.go("/editar_contato"), width=170),
-                    ft.ElevatedButton("Excluir Contato", on_click=lambda _: page.go("/excluir_contato"), width=170),
                     ft.ElevatedButton("Importar Contatos", on_click=lambda _: page.go("/importar_contatos"), width=170),
                     ft.ElevatedButton("Exportar Contatos", on_click=lambda _: page.go("/exportar_contatos"), width=170),
                 ],
@@ -60,7 +59,6 @@ def main(page: ft.Page):
             mail=ft.TextField(label="E-mail", border_radius=10)
             adress=ft.TextField(label="Endereço", border_radius=10)
 
-            # Layout dos botões
             buttons_row = ft.Row([
                 ft.ElevatedButton(
                     "Salvar Contato", 
@@ -89,18 +87,6 @@ def main(page: ft.Page):
                     "/editar_contato",
                     [
                         ft.AppBar(title=ft.Text("Editar Contato"), bgcolor=ft.colors.SURFACE_VARIANT),
-                        ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
-                    ],
-                    horizontal_alignment = ft.CrossAxisAlignment.CENTER,
-                )
-            )
-
-        if page.route == "/excluir_contato":
-            page.views.append(
-                ft.View(
-                    "/excluir_contato",
-                    [
-                        ft.AppBar(title=ft.Text("Excluir Contato"), bgcolor=ft.colors.SURFACE_VARIANT),
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
                     horizontal_alignment = ft.CrossAxisAlignment.CENTER,

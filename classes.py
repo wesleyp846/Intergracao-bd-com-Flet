@@ -33,10 +33,12 @@ class Dados:
         self.conexao.commit()
 
 class Card:
-    def __init__(self,card):
-        self.nome=card
+    def __init__(self,nome):
+        self.nome=nome
         
     def card_expansivel(nome='Nome', tel='Telefone', email='E-mail:', endereco='Endereço:'):
+        cartao=Card(nome)
+        db=Dados('banco.db')
         return ft.ExpansionTile(
             leading=ft.Icon(ft.icons.CONTACT_PHONE),
             title=ft.Text(nome),
@@ -45,7 +47,16 @@ class Card:
             controls=[
                 ft.ListTile(
                     title=ft.Text(email),
-                    subtitle=ft.Text(endereco)
+                    subtitle=ft.Text(endereco),
+                    trailing=ft.PopupMenuButton(
+                        icon=ft.icons.MORE_VERT,
+                        items=[
+                            ft.PopupMenuItem(text="Editar"),
+                            ft.PopupMenuItem(text="Apagar", 
+                                on_click=lambda _: db.deletar_dados(cartao.nome)
+                            ),
+                        ]
+                    )   
                 )
             ]
         )
