@@ -17,3 +17,6 @@ __pycache__/
 # Ignorar arquivos de banco de dados SQLite
 *.sqlite
 *.db
+
+#arquivos de log
+*.log

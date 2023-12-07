@@ -1,6 +1,8 @@
 import flet as ft
-from db import dbcomando
-from card import card_expansivel
+from classes import Dados
+from classes import Card
+
+casa = True
 
 def main(page: ft.Page):
     page.title = "Agenda de Contatos"
@@ -9,8 +11,7 @@ def main(page: ft.Page):
     page.window_height = 650
     page.theme_mode = ft.ThemeMode.DARK
     page.update()
-    db = dbcomando('banco.db')
-    db.criar_tabela('contatos', 'nome', 'tel', 'email', 'endereco')
+    db = Dados('banco.db')
 
     def route_change(route):
         page.views.clear()
@@ -31,9 +32,10 @@ def main(page: ft.Page):
         )
         
         if page.route == "/mostar_contatos":
-            db = dbcomando('banco.db')
-            dados=db.ler_dados('contatos')
-            cards=[card_expansivel(card[1],card[2],card[3],card[4]) for card in dados]
+            db = Dados('banco.db')
+            dados=db.ler_dados()
+            c=Card
+            cards=[c.card_expansivel(card[1],card[2],card[3],card[4]) for card in dados]
             page.views.append(
                 ft.View(
                     "/mostar_contatos",
@@ -41,41 +43,31 @@ def main(page: ft.Page):
                         ft.AppBar(title=ft.Text("Mostar Contatos"), bgcolor=ft.colors.SURFACE_VARIANT),
                         ft.ElevatedButton("pesquisa", on_click=lambda _: page.go("/")),
                         *cards,
-                        #card_expansivel(),
                         ft.ElevatedButton("Pagina Inicial", on_click=lambda _: page.go("/")),
                     ],
                     scroll=ft.ScrollMode.AUTO,
                     horizontal_alignment = ft.CrossAxisAlignment.CENTER,
-                    #vertical_alignment=ft.MainAxisAlignment.END,
                 )
             )
 
         if page.route == "/incluir_contato":
+            db = Dados('banco.db')
+            def salvar_contato(nome, tel, email, endereco):
+                db.salvar_dados(nome, tel, email, endereco)
 
-            db = dbcomando('banco.db')
-
-            # Refs para os campos de texto
-            nome = ft.Ref[ft.TextField]()
-            tel = ft.Ref[ft.TextField]()
-            email = ft.Ref[ft.TextField]()
-            endereco = ft.Ref[ft.TextField]()
-
-            # Função para salvar o contato
-            def salvar_contato(e):
-                texto_saida = [(name.value, phone.value, mail.value, adress.value,)]
-                print(texto_saida)
-                db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', texto_saida)
+            name=ft.TextField(label="Nome", border_radius=10)
+            phone=ft.TextField(label="Telefone", border_radius=10)
+            mail=ft.TextField(label="E-mail", border_radius=10)
+            adress=ft.TextField(label="Endereço", border_radius=10)
 
             # Layout dos botões
             buttons_row = ft.Row([
-                ft.ElevatedButton("Salvar Contato", on_click=salvar_contato, width=170),
+                ft.ElevatedButton(
+                    "Salvar Contato", 
+                    on_click=lambda _: salvar_contato(name.value, phone.value, mail.value, adress.value)
+                ),
                 ft.ElevatedButton("Cancelar", on_click=lambda _: page.go("/"), width=170)
             ], alignment=ft.MainAxisAlignment.CENTER)
-
-            name=ft.TextField(label="Nome", border_radius=10, ref=nome)
-            phone=ft.TextField(label="Telefone", border_radius=10, ref=tel)
-            mail=ft.TextField(label="E-mail", border_radius=10, ref=email)
-            adress=ft.TextField(label="Endereço", border_radius=10, ref=endereco)
 
             page.views.append(
                 ft.View(
@@ -90,36 +82,6 @@ def main(page: ft.Page):
                     ]
                 )
             )
-
-
-            '''
-            #db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', texto_saida)
-            
-            buttons_row = ft.Row([
-                ft.ElevatedButton(
-                    "Salvar Contato", on_click=print("eu"), 
-                    #texto_saida = [(nome.value, tel.value, email.value, endereco.value,)]
-                    #on_click=db.inserir_dados('contatos', 'nome', 'tel', 'email', 'endereco', texto_saida)
-                    #on_click=lambda _: page.go("/"), 
-                    width=170
-                ),
-                ft.ElevatedButton("Cancelar", on_click=lambda _: page.go("/"), width=170)
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            )
-            page.views.append(
-                ft.View(
-                "/incluir_contato",
-                [
-                    ft.AppBar(title=ft.Text("Incluir Contato")),
-                    ft.TextField(label="Nome", border_radius=10,),
-                    ft.TextField(label="Telefone", border_radius=10),
-                    ft.TextField(label="E-mail", border_radius=10), 
-                    ft.TextField(label="Endereço", border_radius=10),
-                    buttons_row,
-                ]
-                )
-            )'''
 
         if page.route == "/editar_contato":
             page.views.append(
@@ -180,5 +142,4 @@ def main(page: ft.Page):
     page.on_view_pop = view_pop
     page.go(page.route)
         
-
-ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+ft.app(target=main) if casa else ft.app(target=main, view=ft.AppView.WEB_BROWSER)
