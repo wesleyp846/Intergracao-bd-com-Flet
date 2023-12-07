@@ -33,6 +33,85 @@ class Dados:
         self.conexao.commit()
 
 class Card:
+    def __init__(self, nome):
+        self.nome = nome
+
+    def card_expansivel(nome='Nome', tel='Telefone', email='E-mail:', endereco='Endereço:'):
+        cartao = Card(nome)
+        db = Dados('banco.db')
+
+        def editar_contato(e):
+            # Lógica para edição do contato
+            print(f"Editar contato: {cartao.nome}")
+
+        def apagar_contato(e):
+            try:
+                # Lógica para apagar o contato
+                db.deletar_dados(cartao.nome)
+                print(f"Contato {cartao.nome} apagado com sucesso!")
+
+                # Atualizar a página ou tomar outra ação necessária após apagar o contato
+                # page.go("/mostar_contatos")  # Isso redirecionaria para a página de mostrar contatos
+                return ft.ExpansionTile(
+                    leading=ft.Icon(ft.icons.CONTACT_PHONE),
+                    title=ft.Text(nome),
+                    subtitle=ft.Text(tel),
+                    trailing=ft.Icon(ft.icons.ARROW_DROP_DOWN),
+                    controls=[
+                        ft.ListTile(
+                            title=ft.Text(email),
+                            subtitle=ft.Text(endereco),
+                            trailing=ft.PopupMenuButton(
+                                icon=ft.icons.MORE_VERT,
+                                items=[
+                                    ft.PopupMenuItem(
+                                        text="Editar",
+                                        on_click=editar_contato,
+                                    ),
+                                    ft.PopupMenuItem(
+                                        text="Apagar",
+                                        on_click=apagar_contato,
+                                    ),
+                                ]
+                            )
+                        )
+                    ]
+                )
+
+            except Exception as ex:
+                print(f"Erro ao apagar contato: {ex}")
+            # Lógica para apagar o contato
+            #print(f"Apagar contato: {cartao.nome}")
+
+        return ft.ExpansionTile(
+            leading=ft.Icon(ft.icons.CONTACT_PHONE),
+            title=ft.Text(nome),
+            subtitle=ft.Text(tel),
+            trailing=ft.Icon(ft.icons.ARROW_DROP_DOWN),
+            controls=[
+                ft.ListTile(
+                    title=ft.Text(email),
+                    subtitle=ft.Text(endereco),
+                    trailing=ft.PopupMenuButton(
+                        icon=ft.icons.MORE_VERT,
+                        items=[
+                            ft.PopupMenuItem(
+                                text="Editar",
+                                on_click=editar_contato,
+                            ),
+                            ft.PopupMenuItem(
+                                text="Apagar",
+                                on_click=apagar_contato,
+                            ),
+                        ]
+                    )
+                )
+            ]
+        )
+
+
+'''
+class Card:
     def __init__(self,nome):
         self.nome=nome
         
@@ -65,3 +144,4 @@ class Card:
 # Jorge=Contato("Jorge", "543322", "fdd@hhh", "")
 # print(Jorge.endereco)
 # Jorge.falar("eu to falando")
+'''
