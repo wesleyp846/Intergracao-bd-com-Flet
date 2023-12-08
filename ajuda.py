@@ -40,7 +40,7 @@ class App(ft.UserControl):
         self.renderizar_todos()
         self.page.update()
 
-    def abrir_acoes(self, e):
+    '''def abrir_acoes(self, e):
         #criando a função para abrir as acoes
         id_user=e.controls.subtitle.value
         self.editar_dados.value = e.controls.title.value
@@ -71,6 +71,7 @@ class App(ft.UserControl):
 
         #para atualizar a pagina
         self.page.update()
+        '''
     
     def renderizar_todos(self):
     #Mostrar todos os dados do banco de dados
@@ -87,7 +88,7 @@ class App(ft.UserControl):
                 ft.ListTile(
                     title=ft.Text(dado[1]),
                     subtitle=ft.Text(dado[0]),
-                    on_click=self.abrir_acoes
+                    #on_click=self.abrir_acoes
                 )
             )
         #self.update()
