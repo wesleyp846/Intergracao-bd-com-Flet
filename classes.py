@@ -41,8 +41,13 @@ class Card:
         db = Dados('banco.db')
 
         def editar_contato(e):
+            tb1 = ft.TextField(label=cartao.nome)
+            db = Dados('banco.db')
+            db.editar_dados(cartao.nome,tb1.value)
+            
             # Lógica para edição do contato
             print(f"Editar contato: {cartao.nome}")
+           
 
         def apagar_contato(e):
             try:
