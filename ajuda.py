@@ -41,7 +41,7 @@ class App(ft.UserControl):
         self.page.update()
 
     def abrir_acoes(self, e):
-    #criando a função para abrir as acoes
+        #criando a função para abrir as acoes
         id_user=e.controls.subtitle.value
         self.editar_dados.value = e.controls.title.value
         self.update()
@@ -90,11 +90,12 @@ class App(ft.UserControl):
                     on_click=self.abrir_acoes
                 )
             )
-        self.update()
+        #self.update()
 
     def ciclo(self):
         #nao deixa o banco feochar a conecxao
         self.renderizar_todos()
+        #self.update()
 
     def adicionar_novo_dado(self, e):
         cursor.execute('INSERT INTO clientes (nome) VALUES (?)',
@@ -106,6 +107,7 @@ class App(ft.UserControl):
         self.page.update()
 
     def build(self):
+        self.ciclo()
         return ft.Column([
             ft.Text('CRUD e SQLite'),
             self.adicionar_dados,
