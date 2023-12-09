@@ -40,6 +40,30 @@ class App(ft.UserControl):
         self.renderizar_todos()
         self.page.update()
 
+    def clicado(self, e):
+        print('chamou o clicado')
+        # print(dir(self.todos_dados))
+        # print(1, self.todos_dados.controls)
+        # print(2, self.todos_dados.data)
+        # print(2, self.todos_dados.__delattr__)
+        print(3, self.todos_dados.event_handlers)
+        # for chave, valor in self.todos_dados.event_handlers.items():
+        #     print(f'Chave: {chave}, Valor: {valor}')
+        print(4, self.todos_dados._add_event_handler)
+        print(5, self.todos_dados._before_build_command)
+        print(6, self.todos_dados._build)
+        print(7, self.todos_dados._build_add_commands)
+        print(8, self.todos_dados._build_command)
+        print(9, self.todos_dados._dispose)
+        print(10, self.todos_dados._get_attr)
+        print(11, self.todos_dados._get_children)
+        print(12, self.todos_dados._get_control_name)
+        print(13, self.todos_dados._get_event_handler)
+        print(14, self.todos_dados.__dict__['_Column__controls'])
+        print(15, self.todos_dados._get_value_or_list_attr)
+        print(16, self.todos_dados._previous_children)
+        print(17, self.todos_dados._wrap_attr_dict)
+
     '''def abrir_acoes(self, e):
         #criando a função para abrir as acoes
         id_user=e.controls.subtitle.value
@@ -88,6 +112,7 @@ class App(ft.UserControl):
                 ft.ListTile(
                     title=ft.Text(dado[1]),
                     subtitle=ft.Text(dado[0]),
+                    on_click=self.clicado,
                     #on_click=self.abrir_acoes
                 )
             )
