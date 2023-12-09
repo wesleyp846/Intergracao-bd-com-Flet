@@ -62,6 +62,19 @@ def main(page:ft.Page):
         ])
     )
 
+    def saveminhanota(e:FilePickerResultEvent):
+        you_file_save_location=e.path
+
+        file_path=f'{you_file_save_location}.pdf'
+        
+        print('nota1')
+
+    file_saver = FilePicker(
+        on_result=saveminhanota
+    )
+
+    page.overlay.append(file_saver)
+
     def buildmeupedido(e):
         mdialog=AlertDialog(
             title=Text(
@@ -112,7 +125,16 @@ def main(page:ft.Page):
                 ),
                 
                 all_food
-            ])    
+            ],
+            scroll='auto'),
+            actions=[
+                ElevatedButton(
+                    'Impromir rcibo',
+                    bgcolor='blue',
+                    color='red',
+                    on_click=lambda e:file_saver.save_file()
+                )
+            ]
         )
         page.dialog=mdialog
         mdialog.open=True
