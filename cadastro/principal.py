@@ -3,6 +3,12 @@ from flet import *
 import random
 import datetime
 import os
+#import para parte de imprimir recibo
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Table,TableStyle
 
 casa=True
 
@@ -66,8 +72,56 @@ def main(page:ft.Page):
         you_file_save_location=e.path
 
         file_path=f'{you_file_save_location}.pdf'
-        
-        print('nota1')
+        doc = SimpleDocTemplate(file_path,pagesizes=letter)
+
+        elements=[]
+
+        styles =getSampleStyleSheet()
+        elements.append(Paragraph('Recibo de compra', styles['title']))
+        customer_name = con_input.content.controls[0].value
+
+        elements.append(Paragraph(f'Nome{customer_name}', styles['Normal']))
+
+        elements.append(Paragraph(f'Data do pedido{formated_data}', styles['Normal']))
+
+        address = con_input.content.controls[1].value
+        elements.append(Paragraph(f'Endereço do cliente {address}', styles['Normal']))
+       
+        elements.append(Paragraph(f'Seus pedidos {address}', styles['Heading1']))
+
+        list_order=[]
+        list_order.append(['Nome comida', 'Qtde', 'Preço'])
+
+        for b in all_food.controls:
+            list_order.append([
+                b.content.controls[0].value,
+                b.content.controls[1].value.replace('R$', '').replace(',', ''),
+                b.content.controls[2].controls[1].value.replace('R$', '').replace(',', ''),
+            ])
+
+        table=Table(list_order)
+
+        table.setStyle(TableStyle([
+            ('BACKGROUND',(0,0),(-1,0),colors.grey),
+            ('TEXTCOLOR',(0,0),(-1,0),colors.whitesmoke),
+            ('ALIGN',(0,0),(-1,0),'CENTER'),
+            ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
+            ('FONTSIZE',(0,0),(-1,0),14),
+            ('BOTTOMPADDING',(0,0),(-1,0),12),
+
+            ('BACKGROUND',(0,0),(-1,-1),colors.beige),
+            ('TEXTCOLOR',(0,0),(-1,-1),colors.black),
+            ('ALIGN',(0,0),(-1,-1),'RIGHT'),
+            ('FONTNAME',(0,0),(-1,-1),'Helvetica'),
+            ('FONTSIZE',(0,0),(-1,-1),14),
+            ('BOTTOMPADDING',(0,0),(-1,-1),8),
+        ]))
+
+        elements.append(table)
+        grand_total = sum([float(row[2]) for row in list_order[1:]])
+        elements.append(Paragraph(f'Total da compra: R${grand_total:.2f}', styles['Heading1']))
+
+        doc.build(elements)
 
     file_saver = FilePicker(
         on_result=saveminhanota
