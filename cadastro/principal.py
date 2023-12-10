@@ -38,7 +38,7 @@ def main(page:ft.Page):
                         size=20
                     ),
                     
-                    Text(f'Total da compra {con_input.content.controls[4].value}',
+                    Text(f'{con_input.content.controls[4].value}',
                         weight='bold',
                         color='black',
                         size=20
@@ -80,17 +80,17 @@ def main(page:ft.Page):
         elements.append(Paragraph('Recibo de compra', styles['title']))
         customer_name = con_input.content.controls[0].value
 
-        elements.append(Paragraph(f'Nome{customer_name}', styles['Normal']))
+        elements.append(Paragraph(f'Nome: {customer_name}', styles['Normal']))
 
-        elements.append(Paragraph(f'Data do pedido{formated_data}', styles['Normal']))
+        elements.append(Paragraph(f'Data do pedido: {formated_data}', styles['Normal']))
 
         address = con_input.content.controls[1].value
-        elements.append(Paragraph(f'Endereço do cliente {address}', styles['Normal']))
+        elements.append(Paragraph(f'Endereço do cliente: {address}', styles['Normal']))
        
-        elements.append(Paragraph(f'Seus pedidos {address}', styles['Heading1']))
+        elements.append(Paragraph(f'Descrição dos pedidos', styles['Heading1']))
 
         list_order=[]
-        list_order.append(['Nome comida', 'Qtde', 'Preço'])
+        list_order.append(['Pedido', 'Quantidade', 'Preço'])
 
         for b in all_food.controls:
             list_order.append([
@@ -111,7 +111,7 @@ def main(page:ft.Page):
 
             ('BACKGROUND',(0,0),(-1,-1),colors.beige),
             ('TEXTCOLOR',(0,0),(-1,-1),colors.black),
-            ('ALIGN',(0,0),(-1,-1),'RIGHT'),
+            ('ALIGN',(0,0),(-1,-1),'CENTER'),
             ('FONTNAME',(0,0),(-1,-1),'Helvetica'),
             ('FONTSIZE',(0,0),(-1,-1),14),
             ('BOTTOMPADDING',(0,0),(-1,-1),8),
@@ -139,37 +139,27 @@ def main(page:ft.Page):
 
             content=Column([
                 Row([
-                    Text(con_input.content.controls[0].value,
+                    #Nome do cliente
+                    Text(f'Cliente: {con_input.content.controls[0].value}',
                         weight='bold',
                         color='black',
-                        size=25
+                        size=25,
+                        text_align='CENTER'
                     ),
-                    Text(f'Data do pedido: {formated_data}',
-                        weight='bold',
-                        color='black',
-                        size=25
-                    )
                 ]),
+                #Data do pedido
+                Text(f'Data do pedido: {formated_data}',
+                    weight='bold',
+                    color='black',
+                    size=25
+                ),
                 
-                Text(con_input.content.controls[1].value,
+                Text(f'Endereço: {con_input.content.controls[1].value}',
                     weight='bold',
                     color='black',
                     size=25,
                     text_align='start'
                 ),
-
-                Row([
-                    Text('Endereço do cliente',
-                        weight='bold',
-                        color='black',
-                        size=25
-                    ),
-                    Text(con_input.content.controls[1].value,
-                        weight='bold',
-                        color='black',
-                        size=25
-                    ),
-                ], alignment='end'),
                 
                 Text(
                     'Seus pedidos',
