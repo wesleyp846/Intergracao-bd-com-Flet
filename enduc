@@ -3,3 +3,5 @@ pip install flet
 pip install db-sqlite3
 
 flet -r main.py 
+
+https://www.youtube.com/watch?v=hs7TUjzwiFM&list=WL&index=23
