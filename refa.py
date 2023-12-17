@@ -67,6 +67,36 @@ def main(page: ft.Page):
     
         if objeto == '0':
             print('Add Contato')
+            Card(
+                content=Container(
+                    content=Column([
+                        Text('Novo cadastro',size=20,weight='bold'),
+                    ])
+                )
+            )
+            page.add(Card)
+            # return Card(
+            #     offset=transform.Offset(0,0),
+            #     animate_offset=animation.Animation(600,curve='easyIn'),
+            #     elevation=30,
+            #     content=Container(
+            #         bgcolor='green200',
+            #         content=Column([
+            #             Row([
+            #                 Text('Novo cadastro',size=20,weight='bold'),
+            #                 IconButton(icon='close',icon_size=30), #on_click=hidecon),
+            #             ]),
+            #         #     name,
+            #         #     age, 
+            #         #     contact,
+            #         #     gender, 
+            #         #     email, 
+            #         #     address,
+            #         #     FilledButton('Salvar dados', on_click=savedata)
+            #         ])
+            #     )
+            # )
+        
         if objeto == '1':
             print('Importar')
         if objeto == '2':
