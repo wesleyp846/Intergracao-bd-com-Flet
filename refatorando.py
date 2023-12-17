@@ -24,15 +24,14 @@ def main(page: ft.Page):
                     content=Column([
                         ft.ExpansionTile(
                             title=ft.Text(f"{lido[1]}"),
-                            subtitle=ft.Text(f"{lido[2]}"),
                             affinity=ft.TileAffinity.LEADING,
                             initially_expanded=True,
                             collapsed_text_color=ft.colors.BLUE,
                             text_color=ft.colors.BLUE,
                             controls=[
-                                Text(f"{lido[1]}"),
-                                ft.ListTile(title=ft.Text(f"{lido[3]}")),
-                                ft.ListTile(title=ft.Text(f"{lido[4]}")),
+                                ft.ListTile(title=ft.Text(f"Telefone: {lido[2]}")),
+                                ft.ListTile(title=ft.Text(f"E-mail: {lido[3]}")),
+                                ft.ListTile(title=ft.Text(f"Endereço: {lido[4]}")),
                             ],
                         ),
                         ft.Row([
@@ -53,6 +52,25 @@ def main(page: ft.Page):
             )
             listagem_contatos.controls.append(card_contato)
         page.update()
+
+    def adicionar_contato():
+        print("Função para adicionar contato")
+
+    def importar_dados():
+        print("Função para importar dados")
+
+    def exportar_dados():
+        print("Função para exportar dados")
+
+    def barra_final(selected_index):
+        objeto=selected_index.data
+    
+        if objeto == '0':
+            print('Add Contato')
+        if objeto == '1':
+            print('Importar')
+        if objeto == '2':
+            print('Exportar')
 
     def deleta_contato(nome):
         db = Dados('banco.db')
@@ -86,7 +104,8 @@ def main(page: ft.Page):
         destinations=[
             NavigationDestination(
                 icon=icons.CONTACT_PHONE_SHARP, 
-                label="Add Contato"
+                label="Add Contato",
+                #on_select=adicionar_contato
             ),
             NavigationDestination(
                 icon=icons.KEYBOARD_DOUBLE_ARROW_UP_SHARP, 
@@ -96,7 +115,8 @@ def main(page: ft.Page):
                 icon=icons.KEYBOARD_DOUBLE_ARROW_DOWN_SHARP, 
                 label="Exportar"
             ),
-        ]
+        ],
+        on_change=barra_final
     )
 
     page.add(
