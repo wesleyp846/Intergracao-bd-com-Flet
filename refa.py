@@ -1,30 +1,4 @@
 import flet as ft
-
-casa = True
-
-def main(page: ft.Page):
-    page.title = "Exemplo Barra de Navegação"
-    page.padding = 10
-    page.window_width = 400
-    page.window_height = 650
-    page.theme_mode = ft.ThemeMode.DARK
-
-    def on_change(selected_index):
-        objeto=selected_index.data
-        
-        if objeto == '0':
-            print('Início')
-        if objeto == '1':
-            print('Buscar')
-        if objeto == '2':
-            print('Config')
-
-    page.navigation_bar = ft.NavigationBar(
-        destinations=[
-            ft.NavigationDestination(icon="home", label="Início"),
-            ft.NavigationDestination(icon="search", label="Buscar"),
-            ft.NavigationDestination(icon="settings", label="Configurações"),
-        ],import flet as ft
 from flet import *
 from classes import Dados
 
@@ -149,16 +123,6 @@ def main(page: ft.Page):
         Column([
             barra_inicial,
             listagem_contatos,
-        ])
-    )
-
-ft.app(target=main) if casa else ft.app(target=main, view=ft.AppView.WEB_BROWSER)
-        on_change=on_change,  # Esta função será chamada quando o destino for alterado
-    )
-
-    page.add(
-        ft.Column([
-            ft.Text("Conteúdo principal vai aqui"),
         ])
     )
 
