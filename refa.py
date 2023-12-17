@@ -62,40 +62,46 @@ def main(page: ft.Page):
     def exportar_dados():
         print("Função para exportar dados")
 
+    def tarsformacaoapa(e):
+        cartao.offset=ft.transform.Offset(0, 0)
+        page.update()
+
+    def tarsformacaodes(e):
+        page.controls.clear()
+        cartao.offset=ft.transform.Offset(0, 0)
+        
+        #page.controls.clear()
+        page.update()
+
+    name=ft.TextField(label="Nome", border_radius=10,)
+    phone=ft.TextField(label="Telefone", border_radius=10)
+    mail=ft.TextField(label="E-mail", border_radius=10)
+    adress=ft.TextField(label="Endereço", border_radius=10)
+    
+    cartao = Card(
+        offset=ft.transform.Offset(0, 0),
+        animate_offset=animation.Animation(600,curve='easyIn'),
+        content=Container(
+            content=Column([
+                name,
+                phone,
+                mail,
+                adress,
+                ElevatedButton(
+                    'desaparece',
+                    on_click=tarsformacaodes,
+                )
+            ]),
+        ),
+    )
+
     def barra_final(selected_index):
         objeto=selected_index.data
     
         if objeto == '0':
             print('Add Contato')
-            Card(
-                content=Container(
-                    content=Column([
-                        Text('Novo cadastro',size=20,weight='bold'),
-                    ])
-                )
-            )
-            page.add(Card)
-            # return Card(
-            #     offset=transform.Offset(0,0),
-            #     animate_offset=animation.Animation(600,curve='easyIn'),
-            #     elevation=30,
-            #     content=Container(
-            #         bgcolor='green200',
-            #         content=Column([
-            #             Row([
-            #                 Text('Novo cadastro',size=20,weight='bold'),
-            #                 IconButton(icon='close',icon_size=30), #on_click=hidecon),
-            #             ]),
-            #         #     name,
-            #         #     age, 
-            #         #     contact,
-            #         #     gender, 
-            #         #     email, 
-            #         #     address,
-            #         #     FilledButton('Salvar dados', on_click=savedata)
-            #         ])
-            #     )
-            # )
+            page.add(cartao)
+            page.update()
         
         if objeto == '1':
             print('Importar')
@@ -153,7 +159,7 @@ def main(page: ft.Page):
         Column([
             barra_inicial,
             listagem_contatos,
-        ])
+        ]),
     )
 
 ft.app(target=main) if casa else ft.app(target=main, view=ft.AppView.WEB_BROWSER)
